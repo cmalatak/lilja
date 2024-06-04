@@ -10,10 +10,10 @@ function App() {
       <div className="App">
         <header className="App-header">
           <Nav />
+          <h3>🍊Get ready to cook some foooooood!🍊</h3>
           <Routes>
             <Route path="/recipe" element={<RecipeSkeleton />} />
           </Routes>
-          <h3>🍊Get ready to cook some foooooood!🍊</h3>
         </header>
       </div>
     </Router>

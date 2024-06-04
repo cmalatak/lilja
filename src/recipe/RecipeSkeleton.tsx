@@ -19,31 +19,44 @@ interface RecipeSkeletonProps {
 // recipe: ["crack eggs into a bowl, and be sure to remove any shell", "add milk, salt, and pepper, to the eggs, and whisk with a fork", "warm up your pan on medium heat", "add oil to the warm pan", "add egg mixture to pan, and stirring occasionally scraping the bottom of the pan.", "Continue to stir until eggs are cooked through to desired consistency, and then they're done!"]
 ///////////////////////////////////////
 
-const Title = styled.div`
-  grid-row-start: 1;
-`;
+const Title = styled.div``;
 
 const RecipeImage = styled.img`
   max-height: 300px;
+  padding-bottom: 8px;
   @media (min-width: 1024px) {
     max-height: 600px;
+    padding-bottom: 16px;
   }
 `;
 
 const Overview = styled.div`
-  grid-template-columns: 33% 33% 33%;
-  grid-template-rows: 40% 40% 20%;
+  display: grid;
+  grid-template: 50% 50% / 33% 33% 33%;
+  background-color: white;
+  border-radius: 8px;
+  color: #000000;
+  padding: 8px;
+  text-align: left;
+  font-size: 14px;
+  margin-bottom: 16px;
+  @media (min-width: 1024px) {
+    font-size: x-large;
+    margin-bottom: 24px;
+  }
 `;
 
 const ArticleContainer = styled.div`
-  grid-template-rows: 56px 1fr;
   @media (min-width: 1024px) {
-    grid-template-columns: 2fr 1fr;
   }
 `;
 
 const Article = styled.div`
-  grid-row-start: 2;
+  background-color: white;
+  border-radius: 8px;
+  color: #000000;
+  padding: 24px;
+  text-align: left;
 `;
 
 const ArticleSection = styled.div`
@@ -56,29 +69,48 @@ const ArticleSection = styled.div`
 `;
 
 const ArticleImagery = styled.img`
-  max-width: 300px;
+  max-width: 100%;
   @media (min-width: 1024px) {
     max-width: 400px;
   }
 `;
 
 const RecipeContainer = styled.div`
-  grid-template-rows: 600px 1fr;
   @media (min-width: 1024px) {
-    grid-template-columns: 2fr 1fr;
   }
 `;
 
 const Ingredients = styled.ul`
-  grid-row-start: 1;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  height: 500px;
+  max-height: 500px;
+  align-items: flex-start;
+  background-color: white;
+  border-radius: 8px;
+  color: #000000;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  li {
+    margin: 8px 0;
+  }
 `;
 
 const Recipe = styled.ol`
-  grid-row-start: 2;
+  align-items: flex-start;
+  text-align: left;
+  background-color: white;
+  border-radius: 8px;
+  color: #000000;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  li {
+    margin: 16px 0;
+  }
+`;
+
+const RecipePageWrapper = styled.div`
+  width: min-content;
 `;
 
 //Actually - is grid the best way to do this? I feel like it should be.... but now i'm not
@@ -103,11 +135,17 @@ const RecipeSkeleton = () =>
       ],
       [
         "There once was a man named Paul. He sat on a very tall wall. Some friends called him Humpty, since his last name was Dumpty. You can guess that this ends with a fall.",
+      ],
+      [
+        "There once was a man named Paul. He sat on a very tall wall. Some friends called him Humpty, since his last name was Dumpty. You can guess that this ends with a fall.",
         "https://as1.ftcdn.net/v2/jpg/02/24/80/54/1000_F_224805478_vwG43D2iKCWjuoGumNsb0sClnZbDmD0X.jpg",
       ],
       [
         "There once was a man named Paul. He sat on a very tall wall. Some friends called him Humpty, since his last name was Dumpty. You can guess that this ends with a fall.",
         "https://as1.ftcdn.net/v2/jpg/02/24/80/54/1000_F_224805478_vwG43D2iKCWjuoGumNsb0sClnZbDmD0X.jpg",
+      ],
+      [
+        "There once was a man named Paul. He sat on a very tall wall. Some friends called him Humpty, since his last name was Dumpty. You can guess that this ends with a fall.",
       ],
     ];
     const ingredients = [
@@ -126,11 +164,30 @@ const RecipeSkeleton = () =>
       "Continue to stir until eggs are cooked through to desired consistency, and then they're done!",
     ];
 
+    const overview = [
+      ["Prep Time", "5 min"],
+      ["Cook Time", "5 min"],
+      ["Total Time", "10 min"],
+      ["Servings", "1"],
+    ];
+
     return (
-      <>
+      <RecipePageWrapper>
         <ArticleContainer>
           <Title>{title}</Title>
           <RecipeImage src={titleImage} />
+          <Overview>
+            {overview.map((note) => {
+              return (
+                <>
+                  <p>
+                    <b>{`${note[0]}: `}</b>
+                    {note[1]}
+                  </p>
+                </>
+              );
+            })}
+          </Overview>
           <Article>
             {article.map((paragraph) => {
               return (
@@ -154,7 +211,7 @@ const RecipeSkeleton = () =>
             })}
           </Recipe>
         </RecipeContainer>
-      </>
+      </RecipePageWrapper>
     );
   };
 
