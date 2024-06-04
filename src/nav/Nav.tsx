@@ -1,17 +1,36 @@
 import React, { ReactHTMLElement } from "react";
+import styled from "styled-components";
 import "./Nav.css";
 import logo from "./Lilja.png";
 
-// Setup styled-components in this repo
+const MobileNav = styled.div`
+  // display: flex;
+  // width: 96%;
+  // justify-content: space-between;
+  // align-items: center;
+  grid-column-start: 1;
+`;
 
-// const MobileNav = styled.div``
+const Hamburger = styled.p`
+  grid-column-start: 1;
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
 
-// const DesktopNav = styled.div``
+const Logo = styled.img`
+  grid-column-start: 3;
+  @media (min-width: 768px) {
+    grid-column-start: 2;
+  }
+`;
 
-// const Nav Container = styled.div`
-//  display: grid;
-//  width: 100%;
-//`
+const DesktopNav = styled.div``;
+
+const NavContainer = styled.div`
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+`;
 
 const Nav = () => {
   const isMobile = window.innerWidth < 768;
