@@ -118,6 +118,7 @@ const RecipePageWrapper = styled.div`
 const RecipeSkeleton = () =>
   // title,
   // titleImage,
+  // overview,
   // article,
   // ingredients,
   // recipe,
@@ -177,21 +178,21 @@ const RecipeSkeleton = () =>
           <Title>{title}</Title>
           <RecipeImage src={titleImage} />
           <Overview>
-            {overview.map((note) => {
+            {overview.map((note, index) => {
               return (
-                <>
+                <div key={index}>
                   <p>
                     <b>{`${note[0]}: `}</b>
                     {note[1]}
                   </p>
-                </>
+                </div>
               );
             })}
           </Overview>
           <Article>
-            {article.map((paragraph) => {
+            {article.map((paragraph, index) => {
               return (
-                <ArticleSection>
+                <ArticleSection key={index}>
                   <p>{paragraph[0]}</p>
                   {paragraph[1] && <ArticleImagery src={paragraph[1]} />}
                 </ArticleSection>
@@ -201,13 +202,13 @@ const RecipeSkeleton = () =>
         </ArticleContainer>
         <RecipeContainer>
           <Ingredients>
-            {ingredients.map((ingredient) => {
-              return <li>{`${ingredient[0]} ${ingredient[1]}`}</li>;
+            {ingredients.map((ingredient, index) => {
+              return <li key={index}>{`${ingredient[0]} ${ingredient[1]}`}</li>;
             })}
           </Ingredients>
           <Recipe>
-            {recipe.map((step) => {
-              return <li>{step}</li>;
+            {recipe.map((step, index) => {
+              return <li key={index}>{step}</li>;
             })}
           </Recipe>
         </RecipeContainer>
