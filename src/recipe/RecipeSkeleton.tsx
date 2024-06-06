@@ -4,6 +4,7 @@ import styled from "styled-components";
 interface RecipeSkeletonProps {
   title: string;
   titleImage: string;
+  description: string;
   article: string[][]; // An array where each entry is a paragraph array. Index 0 of each paragraph array is the text. Index 1 (which is optional) is an image to go along with it.
   ingredients: string[][]; // An array where each entry is an ingredient array. Where index 0 of each ingredient array is the ingredient and index 1 is the quantity
   recipe: string[]; // Array is mapped over to create a bullet point in the list for each entry.
@@ -14,9 +15,11 @@ interface RecipeSkeletonProps {
 ///////////////////////////////////////
 // title: "Scrambled Eggs";
 // titleImage: "url for egg image"
+// description: "A classic! Everyone loves a good ol heaping plate of scrambled eggs. Your friends will be so impressed!"
 // article: [["There once was a man named Paul. He sat on a very tall wall. Some friends called him Humpty, since his last name was Dumpty. You can guess that this ends with a fall.", "cracked-egg-picture"], ["There once was a man named Paul. He sat on a very tall wall. Some friends called him Humpty, since his last name was Dumpty. You can guess that this ends with a fall.", "cracked-egg-picture"], ["There once was a man named Paul. He sat on a very tall wall. Some friends called him Humpty, since his last name was Dumpty. You can guess that this ends with a fall.", "cracked-egg-picture"]]
 // ingredients: [["eggs", "2"], ["milk", "1/4c"], ["oil", "once around the pan"], ["salt", "pinch"], ["pepper", "pinch"]]
 // recipe: ["crack eggs into a bowl, and be sure to remove any shell", "add milk, salt, and pepper, to the eggs, and whisk with a fork", "warm up your pan on medium heat", "add oil to the warm pan", "add egg mixture to pan, and stirring occasionally scraping the bottom of the pan.", "Continue to stir until eggs are cooked through to desired consistency, and then they're done!"]
+// slug? use to get recipe from slug?
 ///////////////////////////////////////
 
 const Title = styled.div``;
@@ -30,9 +33,13 @@ const RecipeImage = styled.img`
   }
 `;
 
+const Description = styled.div`
+  grid-column: 1 / span 3;
+`;
+
 const Overview = styled.div`
   display: grid;
-  grid-template: 50% 50% / 33% 33% 33%;
+  grid-template: 33% 33% 33% / 33% 33% 33%;
   background-color: white;
   border-radius: 8px;
   color: #000000;
@@ -118,6 +125,7 @@ const RecipePageWrapper = styled.div`
 const RecipeSkeleton = () =>
   // title,
   // titleImage,
+  // description
   // overview,
   // article,
   // ingredients,
@@ -128,6 +136,9 @@ const RecipeSkeleton = () =>
 
     const titleImage =
       "https://www.allrecipes.com/thmb/0VXMwCY9RVNrNvWcF_9v0iZpNqA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/JF_241160_CreamyCottageCheeseScrambled_4x3_12902-619d00dc88594ea9b8ed884a108db16d.jpg";
+
+    const description =
+      "A classic! Everyone loves a good ol heaping plate of scrambled eggs. Your friends will be so impressed!";
 
     const article = [
       [
@@ -178,6 +189,7 @@ const RecipeSkeleton = () =>
           <Title>{title}</Title>
           <RecipeImage src={titleImage} />
           <Overview>
+            <Description>{description}</Description>
             {overview.map((note, index) => {
               return (
                 <div key={index}>
