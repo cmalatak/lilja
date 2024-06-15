@@ -1,22 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import "./Nav.css";
 import logo from "./Lilja.png";
+import menuIcon from "../assets/icons8-menu-rounded-100.png";
+import closeIcon from "../assets/closeIcon.png";
+import MockNavData from "./MockNavData.ts";
 
-// const MobileNav = styled.div`
-//   // display: flex;
-//   // width: 96%;
-//   // justify-content: space-between;
-//   // align-items: center;
-//   grid-column-start: 1;
-// `;
+const NavBanner = styled.nav`
+  margin-top: 16px;
+  display: flex;
+  width: 96%;
+  justify-content: space-between;
+  align-items: center;
+`;
 
-// const Hamburger = styled.p`
-//   grid-column-start: 1;
-//   @media (min-width: 768px) {
-//     display: none;
-//   }
-// `;
+const Button = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+`;
+
+const Hamburger = styled.img`
+  width: 32px;
+`;
 
 const Logo = styled.img`
   grid-column-start: 3;
@@ -37,15 +42,8 @@ const LogoLink = styled(Link)`
   justify-self: center;
 `;
 
-// const DesktopNav = styled.div``;
-
-// const NavContainer = styled.div`
-//   display: grid;
-//   grid-template-columns: 33% 33% 33%;
-// `;
-
 const Sidebar = styled.div`
-  background-color: #ffffff;
+  background-color: #6a041d;
   position: absolute;
   left: 0;
   top: 0;
@@ -79,25 +77,38 @@ const Nav = () => {
         closeSidebar();
       }
     };
-
     document.body.addEventListener("mousedown", closeHandler);
-
     return () => document.body.removeEventListener("mousedown", closeHandler);
   }, []);
 
+  const MenuItems = Object.entries(MockNavData);
+
   return (
     <>
-      <nav className="mobile-nav">
-        <button onClick={handleHamburgerClick}>|||</button>
+      <NavBanner>
+        <Button onClick={handleHamburgerClick}>
+          <Hamburger src={menuIcon} />
+        </Button>
         <Sidebar className={sidebarClass} ref={sidebarNav}>
-          <button onClick={closeSidebar}>close</button>
-          <a href={window.location.origin + "/recipe"}>Recipe</a>
+          <Button onClick={closeSidebar}>
+            <Hamburger src={closeIcon} />
+          </Button>
+          {MenuItems.map((menuItem: any) => {
+            return (
+              <Link
+                href={window.location.origin + menuItem[1]["default"]}
+                key={menuItem[0]}
+              >
+                {menuItem[0]}
+              </Link>
+            );
+          })}
         </Sidebar>
 
         <LogoLink href={window.location.origin}>
           <Logo src={logo} className="App-logo" alt="logo" />
         </LogoLink>
-      </nav>
+      </NavBanner>
     </>
   );
 };

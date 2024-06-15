@@ -37,9 +37,9 @@ const FeaturedDescription = styled.div`
   background-color: white;
 
   color: #000000;
-  padding: 8px;
+  padding: 8px 0 8px 8px;
   text-align: left;
-  width: 98%;
+  width: 97%;
 `;
 
 const OtherCoolStuffWrapper = styled.div`
